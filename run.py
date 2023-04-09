@@ -46,47 +46,49 @@ def gen_random_word():
 
 begin_game()
 
-word = gen_random_word() # assigning a variable to a word user is trying to guess
+
+def play_game():
+    word = gen_random_word() # assigning a variable to a word user is trying to guess
 
 
 
-for i in range(6):
-    count = 0
-    guess = input('Your 5 letter word of choice is: ').lower()
+    for attempt in range(1, 7):
+        guess = input('Your 5 letter word of choice is: ').lower()
+        while len(guess) != 5:
+            print('Invalid entry! Enter a five letter word.')
+            guess = input('Your 5 letter word of choice is: ').lower()
+            
+
+
+       
     
-    
-    
 
-# overwrite the last line in the console
-    sys.stdout.write("\x1b[1A")
-    sys.stdout.write("\x1b[2K")
+    # overwrite the last line in the console
+        sys.stdout.write("\x1b[1A")
+        sys.stdout.write("\x1b[2K")
 
-    for i in range(min(len(guess), 5)):
-        if guess[i] == word[i]:
-            print(colored(guess[i], 'green'), end="")
-            # guess is in word and correct position
-        elif guess[i] in word:
-            print(colored(guess[i], 'yellow'), end="")
-            # guess is in word but diff. position
-        else:
-            print(guess[i], end="")
-    print()
+        for i in range(min(len(guess), 5)):
+            if guess[i] == word[i]:
+                print(colored(guess[i], 'green'), end="")
+                # guess is in word and correct position
+            elif guess[i] in word:
+                print(colored(guess[i], 'yellow'), end="")
+                # guess is in word but diff. position
+            else:
+                print(guess[i], end="")
+        print()
 
-    if guess == word:
-        print(colored(f"You guessed my secret word in {i} attempts", 'red'))
-        break
-    elif i == 6 and player_input != word:
-        print(f'You lose, the correct word was -> {word}')
+        if guess == word:
+            print(colored(f"You guessed my secret word in {attempt} attempts", 'red'))
+            break
+        elif attempt == 6:
+            print(f'You lose, the correct word was -> {word}')
+            print()
 
-begin_game()   
+play_game()   
 
-replay = str(input("Do you want to play again (type yes or no): "))
-if replay == 'yes' or 'y':
-    begin_game()
+replay = input("Do you want to play again (type yes or no): ")
+if replay == 'yes' or replay == 'y':
+    play_game()
 else:
-    sys.exit(0)
-
-        
-
-
-    
+    sys.exit()
