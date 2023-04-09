@@ -21,6 +21,13 @@ def start_menu():
                                     |______|                                           
 
 """)
+
+
+    print('Green specifies the correct letter and position.')
+    print('Yellow specifies the letter is in the word, but in the wrong position.')
+    print('White indicates that the letter is not in the word.\n')
+
+    print('Are you upto this challenge, I will give you SIX tries')
     print("try to guess my secret 5 letter word and hit enter: \n")
 
 
