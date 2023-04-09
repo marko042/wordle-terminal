@@ -1,17 +1,18 @@
 import random
-
 # built-in module that you can use to make random numbers/elements
+
 import sys
-
 # It allows us to access parameters and functionalities specific to the terminal
-from termcolor import colored
 
+from termcolor import colored
 # Python library for color and formatting in terminal
 
 
-def start_menu():
 
-    print(""" __          __              _  _      _______                      _                _ 
+
+def begin_game():
+    print("""
+ __          __              _  _      _______                      _                _ 
  \ \        / /             | || |    |__   __|                    (_)              | |
   \ \  /\  / /___   _ __  __| || |  ___  | |  ___  _ __  _ __ ___   _  _ __    __ _ | |
    \ \/  \/ // _ \ | '__|/ _` || | / _ \ | | / _ \| '__|| '_ ` _ \ | || '_ \  / _` || |
@@ -20,7 +21,8 @@ def start_menu():
                                      ______                                            
                                     |______|                                           
 
-""")
+
+    """)
 
 
     print('Green specifies the correct letter and position.')
@@ -28,43 +30,63 @@ def start_menu():
     print('White indicates that the letter is not in the word.\n')
 
     print('Are you upto this challenge, I will give you SIX tries')
-    print("try to guess my secret 5 letter word and hit enter: \n")
+    print("try to guess my secret 5 letter word and hit enter \n")
 
-
-def gen_rand_word():
+def gen_random_word():
     """
-    reads random word by opening and reading from a file using a split delimiter function
-    previously created containing a number of 5 letter words.
+    Using with function, open the file in read mode. 
+    The with function takes care of closing the file automatically.
+    Read all the text from the file and store in a string
+    Split the string into words separated by space.
+    Use random.choice() to pick a word or string.
     """
-    with open("words.txt", "r") as file:
-        words = file.read().splitlines()
+    with open("words.txt") as f:
+        words = f.read().splitlines()
         return random.choice(words)
 
+begin_game()
 
-start_menu()
-word = gen_rand_word()  # assigning a variable to a word user is trying to guess
+word = gen_random_word() # assigning a variable to a word user is trying to guess
 
-go_again = ""
-while go_again != "q":
-    for attempt in range(1, 7):
-        guess = input().lower()
 
-        # overwrite the last line in the console
-        sys.stdout.write("\x1b[1A")
-        sys.stdout.write("\x1b[2K")
 
-        for i in range(min(len(guess), 5)):
-            if guess[i] == word[i]:
-                print(colored(guess[i], "green"), end="")
-            elif guess[i] in word:
-                print(colored(guess[i], "yellow"), end="")
-            else:
-                print(guess[i], end="")
-        print()
+for i in range(6):
+    count = 0
+    guess = input('Your 5 letter word of choice is: ').lower()
+    
+    
+    
 
-        if guess == word:
-            print(f"You win! The word was, {word} and it took you {attempt} times")
-            break
-        elif attempt == 6:
-            print(f"wrong the correct word  was {word}")
-    go_again = input("Want to play again?\n Type q to exit.\n")
+# overwrite the last line in the console
+    sys.stdout.write("\x1b[1A")
+    sys.stdout.write("\x1b[2K")
+
+    for i in range(min(len(guess), 5)):
+        if guess[i] == word[i]:
+            print(colored(guess[i], 'green'), end="")
+            # guess is in word and correct position
+        elif guess[i] in word:
+            print(colored(guess[i], 'yellow'), end="")
+            # guess is in word but diff. position
+        else:
+            print(guess[i], end="")
+    print()
+
+    if guess == word:
+        print(colored(f"You guessed my secret word in {i} attempts", 'red'))
+        break
+    elif i == 6 and player_input != word:
+        print(f'You lose, the correct word was -> {word}')
+
+begin_game()   
+
+replay = str(input("Do you want to play again (type yes or no): "))
+if replay == 'yes' or 'y':
+    begin_game()
+else:
+    sys.exit(0)
+
+        
+
+
+    
