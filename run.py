@@ -86,7 +86,7 @@ def play_game():
         print()
 
         if guess == word:
-            print(colored(f"You guessed my secret word in {attempt} attempts", 'red'))
+            print(colored(f"You guessed my word in {attempt} attempts", 'red'))
             break
         elif attempt == 6:
             print(f'You lose, the correct word was -> {word}')
