@@ -11,6 +11,12 @@ from termcolor import colored
 
 
 def begin_game():
+
+    """
+    menu that appears when we start the game, including
+    short instruction and a bit of graphic to be more
+    user friendly and engaging for the player 
+    """
     print("""
  __          __              _  _      _______                      _                _ 
  \ \        / /             | || |    |__   __|                    (_)              | |
@@ -48,20 +54,21 @@ begin_game()
 
 
 def play_game():
-    word = gen_random_word() # assigning a variable to a word user is trying to guess
-
+    """
+    putting the logic of word lenght and also the colored letters into one function
+    so we can call it conveniently later when giving a player choice to play again
+    """
+    word = gen_random_word() # reading a random word from list 
+    words = [word for word in words if len(word.strip())==5] 
+    # making sure we have no white spaces or not 5 letter words in the words file
 
 
     for attempt in range(1, 7):
-        guess = input('Your 5 letter word of choice is: ').lower()
+        guess = input('Your 5 letter word of choice is:\n').lower()
         while len(guess) != 5:
             print('Invalid entry! Enter a five letter word.')
             guess = input('Your 5 letter word of choice is: ').lower()
             
-
-
-       
-    
 
     # overwrite the last line in the console
         sys.stdout.write("\x1b[1A")
