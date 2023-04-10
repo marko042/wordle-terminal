@@ -32,6 +32,13 @@ Your challenge is to guess a five-letter word in six attempts. Each time you gue
 
     Flowchart
 
-    [Heading text](/assets/images/flow-chart.PNG)
+    ![Heading text](/assets/images/flow-chart.PNG)
+
+     # Existing features
+     Logo and Intro Message
+
+     ![Heading text](/assets/images/intro-logo1.PNG)
+
+
 
     
