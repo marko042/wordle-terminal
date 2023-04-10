@@ -59,9 +59,7 @@ def play_game():
     so we can call it conveniently later when giving a player choice to play again
     """
     word = gen_random_word() # reading a random word from list 
-    words = [word for word in words if len(word.strip())==5] 
-    # making sure we have no white spaces or not 5 letter words in the words file
-
+    
 
     for attempt in range(1, 7):
         guess = input('Your 5 letter word of choice is:\n').lower()
